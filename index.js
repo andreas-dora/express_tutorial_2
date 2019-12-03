@@ -12,14 +12,33 @@ app.set('view engine', 'pug');
 
 // Home Route
 app.get('/', function(req,res){
-  // var article = [
-  //   id:1,
-  //   article,
-  // ]
+  let articles =[
+    {
+      id: 1,
+      titel: 'Geschichte eins',
+      author: 'Andy Ding',
+      body: 'Hier steht die erste Geschichte'
+    },
+    {
+      id:2,
+      titel: 'Zweites Kapitel',
+      author: 'Bing Bong',
+      body: 'Hier steht der zweite Teil der Geschichte'
+    },
+    {
+      id:3,
+      titel: 'Drittes Kapitel',
+      author: 'Andy Ding',
+      body: 'Hier steht das Ende der Geschichte'
+    }
+  ];
+
   res.render('index', {
-    titel: 'Article'
+    titel: 'Articles',
+    articles: articles
   });
 });
+
 
 // Add Route
 app.get('/articles/add', function(req,res){
