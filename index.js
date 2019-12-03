@@ -17,13 +17,13 @@ app.get('/', function(req,res){
       id: 1,
       titel: 'Geschichte eins',
       author: 'Andy Ding',
-      body: 'Hier steht die erste Geschichte'
+      body: 'Hier steht der Anfang der Geschichte'
     },
     {
       id:2,
       titel: 'Zweites Kapitel',
       author: 'Bing Bong',
-      body: 'Hier steht der zweite Teil der Geschichte'
+      body: 'Hier steht der Hauptteil der Geschichte'
     },
     {
       id:3,
@@ -38,7 +38,6 @@ app.get('/', function(req,res){
     articles: articles
   });
 });
-
 
 // Add Route
 app.get('/articles/add', function(req,res){

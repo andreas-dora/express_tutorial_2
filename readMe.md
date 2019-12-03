@@ -122,7 +122,7 @@ Alle "HTML"-Damit Dateien richtig gerendert weren können brauchen sie eine .pug
 # Pug-Dateine erstellen
 Wie bereits erwähnt verzichtet Pug anstelle von Tags Indentations,  also einrücken.
 
-```
+```html
 doctype html
 html
   head
@@ -133,25 +133,86 @@ html
       p Das macht keinen Spaß  
 
 ```
-
 Vielleicht kann diese Schreibweise ja Hacker abschrecken, aber sie ist auch sehr Fehleranfällig. Man kann zum Einrücken entweder Tabulatoren oder Leerzeichen benutzen, aber auf keien Fall Beides. 
 
 Templates werden in der Regel nicht per Hand befüllt sondern automatisch von einm Serverprogamm
+---
+
+# Eine Vorlage in Pug bauen 
+Viele Informationen wiederholen sich auf jeder Seite. 
+Um Unssere Webseite etwas leichter zu machen. Bauen wir uns eine Vorlage, die für alle weiteren Seiten diese Informationen Bereit hällt.
+Dafür erstellen wir eine Datei mit dem Namen layout.pug im views Ordner.
+
+Deren Inhalt sieht dann ungefähr so aus.
 ```html
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hier steht doch eh immer das selbe drin">
-  <meta name="keywords" content="wem, fällt da auch was neues ein">
-  <meta name="author" content="Andreas Breitwieser">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
+doctype html
+html
+  head
+    titel Geschichtensammlung
+  body
+    block content
+    br
+    hr
+    footer
+      p &copy; Andreas B
 ```
+Die Folgenden Seiten können sich dann alles was auf dieser Seite schon niedergeschrieben wurde ersparen.
+
+Um vor der Instalation einer Datenbank schon mal zu zeigen wie wunderbar dynamisch so eine Seite gefüllt wird, bauen wir in unsre index.js Datei mal ein kleines Array ein:
+
+```javascript
+const express = require('express');
+
+// Path ist ein Core Modul
+const path = require('path');
+
+// Init App
+const app = express();
+
+// Load View Engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// Home Route
+app.get('/', function(req,res){
+  let articles =[
+    {
+      id: 1,
+      titel: 'Geschichte eins',
+      author: 'Andy Ding',
+      body: 'Hier steht der Anfang der Geschichte'
+    },
+    {
+      id:2,
+      titel: 'Zweites Kapitel',
+      author: 'Bing Bong',
+      body: 'Hier steht der Hauptteil der Geschichte'
+    },
+    {
+      id:3,
+      titel: 'Drittes Kapitel',
+      author: 'Andy Ding',
+      body: 'Hier steht das Ende der Geschichte'
+    }
+  ];
+
+  res.render('index', {
+    titel: 'Articles',
+    articles: articles
+  });
+});
+
+// Add Route
+app.get('/articles/add', function(req,res){
+  res.render('add_article', {
+    titel: 'Add Article'
+  });
+});
+
+// Start Server
+app.listen(3000, function(){
+  console.log('The Machine listens');
+})
+```
+---
+# MongoDb installieren
