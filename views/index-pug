@@ -1,0 +1,8 @@
+doctype html
+html
+  head
+    titel So etwas Dummes
+  body
+    h1 Das macht keinen Spaß
+    article
+      p Das macht keinen Spaß  
