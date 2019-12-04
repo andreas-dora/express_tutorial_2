@@ -215,8 +215,15 @@ app.listen(3000, function(){
 })
 ```
 ---
-# MongoDb installieren
+# MongoDB 
+## MongoDB istalieren
+
 Quelle: [MongoDB Crash Course](https://www.youtube.com/watch?v=-56x56UppqQ) von Travesy Media 2019
+
+(Ich habe das Video bis Minute 20 aufmerksam verfolgt.)
+
+Hier ein nütliches [cheatsheat](https://gist.github.com/bradtraversy/f407d642bdc3b31681bc7e56d95485b6).
+
 
 Hier soll man im ersten Schritt [Homebrew](https://brew.sh/index_de) instalieren. 
 
@@ -517,3 +524,9 @@ wir bekommen folgendes zurück:
 `WriteResult({ "nRemoved" : 1 })`
 
 ---
+
+# Atlas
+
+Um Atlas zu nutzen muss man sich bei mongodb.com registrieren.
+
+https://cloud.mongodb.com/user#/atlas/login
